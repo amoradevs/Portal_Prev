@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+interface Reference {
+  label: string;
+  url: string;
+  note?: string;
+}
+
 interface TopicData {
   title: string;
   subtitle: string;
@@ -7,6 +13,7 @@ interface TopicData {
   objectives: string[];
   sections: { title: string; content: string; items?: string[] }[];
   highlight?: string;
+  references: Reference[];
 }
 
 const topicsData: Record<string, TopicData> = {
@@ -54,50 +61,11 @@ const topicsData: Record<string, TopicData> = {
         ],
       },
     ],
-  },
-  aposentadorias: {
-    title: "Aposentadorias",
-    subtitle: "Regras vigentes, transição e cálculo de benefícios",
-    tag: "03 · Essencial",
-    objectives: [
-      "Dominar as regras de aposentadoria pós-Reforma (EC 103/2019)",
-      "Aplicar as regras de transição para segurados filiados antes de nov/2019",
-      "Calcular o valor do benefício conforme as novas regras",
-      "Identificar casos de aposentadoria especial e suas exigências",
-    ],
-    highlight: "A Emenda Constitucional 103/2019 (Reforma Previdenciária) alterou substancialmente as regras de aposentadoria, introduzindo idade mínima e progressividade de pontos.",
-    sections: [
-      {
-        title: "Aposentadoria por Idade",
-        content: "Após a EC 103/2019, a aposentadoria por idade exige:",
-        items: [
-          "65 anos (homens) / 62 anos (mulheres) — regra permanente",
-          "15 anos de contribuição para mulheres e 20 anos para homens",
-          "Valor: 60% do salário-de-benefício + 2% ao ano excedente a 20 anos (H) ou 15 anos (M)",
-          "100% do SB exige 40 anos de contribuição (H) ou 35 anos (M)",
-        ],
-      },
-      {
-        title: "Regras de Transição",
-        content: "Para segurados que já contribuíam antes de 13/11/2019, existem cinco regras alternativas:",
-        items: [
-          "Pedágio de 50% — apenas para quem faltava até 2 anos",
-          "Pedágio de 100% — sem limite de idade, mas com fator",
-          "Sistema de pontos progressivos — soma de idade + tempo de contribuição",
-          "Aposentadoria por idade com tempo reduzido — transição progressiva",
-          "Aposentadoria por tempo com redução de idade — comparação com regra anterior",
-        ],
-      },
-      {
-        title: "Aposentadoria Especial",
-        content: "Destinada a segurados expostos a agentes nocivos (físicos, químicos ou biológicos):",
-        items: [
-          "15, 20 ou 25 anos de exposição, conforme o agente",
-          "Exige PPP (Perfil Profissiográfico Previdenciário) e LTCAT",
-          "Incompatível com retorno ao trabalho em ambiente insalubre",
-          "Exposição deve ser habitual e permanente — não eventual",
-        ],
-      },
+    references: [
+      { label: "CF/88 — Arts. 194 a 204 (Seguridade Social)", url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", note: "Planalto.gov.br" },
+      { label: "Lei 8.213/91 — Planos de Benefícios da Previdência Social", url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm", note: "Planalto.gov.br" },
+      { label: "Lei 8.212/91 — Custeio da Seguridade Social", url: "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm", note: "Planalto.gov.br" },
+      { label: "Decreto 3.048/99 — Regulamento da Previdência Social", url: "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm", note: "Planalto.gov.br" },
     ],
   },
 
@@ -157,6 +125,64 @@ const topicsData: Record<string, TopicData> = {
           "Fator previdenciário NÃO se aplica aos benefícios por incapacidade",
         ],
       },
+    ],
+    references: [
+      { label: "Lei 8.213/91 — Arts. 59 a 86 (benefícios por incapacidade)", url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm", note: "Planalto.gov.br" },
+      { label: "Decreto 3.048/99 — Arts. 71 a 112", url: "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm", note: "Planalto.gov.br" },
+      { label: "STJ — REsp 1.648.305/RS (acréscimo de 25% — recurso repetitivo)", url: "https://processo.stj.jus.br/processo/revista/documento/mediado/?componente=ITA&sequencial=1625906&num_registro=201700015268&data=20180214", note: "Verificar texto na íntegra no STJ" },
+      { label: "IN INSS nº 128/2022 — normas de benefícios", url: "https://www.in.gov.br/en/web/dou/-/instrucao-normativa-pres-inss-n-128-de-28-de-marco-de-2022-389275446", note: "DOU — confirmar vigência" },
+    ],
+  },
+
+  aposentadorias: {
+    title: "Aposentadorias",
+    subtitle: "Regras vigentes, transição e cálculo de benefícios",
+    tag: "03 · Essencial",
+    objectives: [
+      "Dominar as regras de aposentadoria pós-Reforma (EC 103/2019)",
+      "Aplicar as regras de transição para segurados filiados antes de nov/2019",
+      "Calcular o valor do benefício conforme as novas regras",
+      "Identificar casos de aposentadoria especial e suas exigências",
+    ],
+    highlight: "A Emenda Constitucional 103/2019 (Reforma Previdenciária) alterou substancialmente as regras de aposentadoria, introduzindo idade mínima e progressividade de pontos.",
+    sections: [
+      {
+        title: "Aposentadoria por Idade",
+        content: "Após a EC 103/2019, a aposentadoria por idade exige:",
+        items: [
+          "65 anos (homens) / 62 anos (mulheres) — regra permanente",
+          "15 anos de contribuição para mulheres e 20 anos para homens",
+          "Valor: 60% do salário-de-benefício + 2% ao ano excedente a 20 anos (H) ou 15 anos (M)",
+          "100% do SB exige 40 anos de contribuição (H) ou 35 anos (M)",
+        ],
+      },
+      {
+        title: "Regras de Transição",
+        content: "Para segurados que já contribuíam antes de 13/11/2019, existem cinco regras alternativas:",
+        items: [
+          "Pedágio de 50% — apenas para quem faltava até 2 anos",
+          "Pedágio de 100% — sem limite de idade, mas com fator",
+          "Sistema de pontos progressivos — soma de idade + tempo de contribuição",
+          "Aposentadoria por idade com tempo reduzido — transição progressiva",
+          "Aposentadoria por tempo com redução de idade — comparação com regra anterior",
+        ],
+      },
+      {
+        title: "Aposentadoria Especial",
+        content: "Destinada a segurados expostos a agentes nocivos (físicos, químicos ou biológicos):",
+        items: [
+          "15, 20 ou 25 anos de exposição, conforme o agente",
+          "Exige PPP (Perfil Profissiográfico Previdenciário) e LTCAT",
+          "Incompatível com retorno ao trabalho em ambiente insalubre",
+          "Exposição deve ser habitual e permanente — não eventual",
+        ],
+      },
+    ],
+    references: [
+      { label: "EC 103/2019 — Reforma da Previdência (texto integral)", url: "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm", note: "Planalto.gov.br" },
+      { label: "Lei 8.213/91 — Arts. 29 a 57 (cálculo e espécies de aposentadoria)", url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm", note: "Planalto.gov.br" },
+      { label: "Decreto 3.048/99 — Arts. 52 a 70 (aposentadorias no RGPS)", url: "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm", note: "Planalto.gov.br" },
+      { label: "STF — Repercussão Geral: aposentadoria especial e conversão de tempo", url: "https://portal.stf.jus.br/repercussao/", note: "Confirmar temas atuais no portal STF" },
     ],
   },
 
@@ -221,6 +247,12 @@ const topicsData: Record<string, TopicData> = {
         ],
       },
     ],
+    references: [
+      { label: "Lei 8.213/91 — Arts. 74 a 93 (pensão, auxílio-reclusão, salário-família)", url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm", note: "Planalto.gov.br" },
+      { label: "EC 103/2019 — Art. 23 (novo cálculo da pensão por morte)", url: "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm", note: "Planalto.gov.br" },
+      { label: "Lei 12.873/2013 — salário-maternidade na adoção", url: "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12873.htm", note: "Planalto.gov.br" },
+      { label: "STJ — Pesquisa de jurisprudência (pensão por morte)", url: "https://scon.stj.jus.br/SCON/", note: "Filtrar por 'pensão por morte' — verificar decisões recentes" },
+    ],
   },
 
   "previdencia-complementar": {
@@ -279,6 +311,12 @@ const topicsData: Record<string, TopicData> = {
         ],
       },
     ],
+    references: [
+      { label: "LC 109/2001 — Regime de Previdência Complementar (texto integral)", url: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp109.htm", note: "Planalto.gov.br" },
+      { label: "Previc — Superintendência Nacional de Previdência Complementar", url: "https://www.gov.br/previc/pt-br", note: "Fundos fechados, resoluções e normativos" },
+      { label: "Susep — Superintendência de Seguros Privados (planos abertos)", url: "https://www.gov.br/susep/pt-br", note: "PGBL, VGBL e regulamentação de seguradoras" },
+      { label: "Receita Federal — Previdência Privada e IR (PGBL/VGBL)", url: "https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-demonstrativos/dirpf", note: "Confirmar alíquotas e regras vigentes" },
+    ],
   },
 
   "processo-administrativo": {
@@ -314,7 +352,7 @@ const topicsData: Record<string, TopicData> = {
           "Recurso especial ao Conselho Pleno do CRPS: para uniformização de jurisprudência administrativa",
           "Efeito suspensivo: o recurso suspende os efeitos da decisão recorrida",
           "Recurso não exige advogado, mas a representação técnica qualifica o pedido",
-          "Importante: o recurso interrompe a prescrição — STJ, REsp 1.381.403",
+          "Importante: o recurso interrompe a prescrição — verificar jurisprudência STJ atualizada",
         ],
       },
       {
@@ -334,11 +372,17 @@ const topicsData: Record<string, TopicData> = {
         items: [
           "Requisitos: probabilidade do direito + perigo de dano ou risco ao resultado útil do processo (art. 300 CPC)",
           "Perigo de dano: o caráter alimentar do benefício e a situação de vulnerabilidade do segurado são fundamentos sólidos",
-          "Cumprimento pelo INSS: 45 dias após a intimação, sob pena de multa (STJ, AgInt no REsp 1.865.349)",
+          "Cumprimento pelo INSS: 45 dias após a intimação, sob pena de multa — verificar jurisprudência TRF e STJ atualizadas",
           "DIB judicial: quando deferida a tutela, a DIB retroage à DER, salvo fundamento diverso do juiz",
           "Reversibilidade: o juiz deve ponderar — benefício previdenciário tem caráter alimentar, o que atenua a exigência",
         ],
       },
+    ],
+    references: [
+      { label: "Lei 9.784/99 — Processo Administrativo Federal", url: "https://www.planalto.gov.br/ccivil_03/leis/l9784.htm", note: "Planalto.gov.br" },
+      { label: "Decreto 10.410/2020 — Estrutura e funcionamento do CRPS/JRPS", url: "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/decreto/D10410.htm", note: "Planalto.gov.br" },
+      { label: "STF — RE 631.240 (Tema 350 — prévio requerimento administrativo)", url: "https://portal.stf.jus.br/processos/detalhe.asp?incidente=4803765", note: "Ler ementa e tese fixada" },
+      { label: "CPC/2015 — Arts. 300 a 311 (Tutela de Urgência e Evidência)", url: "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm", note: "Planalto.gov.br" },
     ],
   },
 
@@ -356,25 +400,23 @@ const topicsData: Record<string, TopicData> = {
     sections: [
       {
         title: "Principais Súmulas do STJ",
-        content: "O STJ uniformiza a interpretação da legislação federal. Súmulas essenciais para a prática previdenciária:",
+        content: "O STJ uniformiza a interpretação da legislação federal. Súmulas essenciais para a prática previdenciária — confirmar texto exato no portal oficial:",
         items: [
-          "Súmula 85: Nas relações jurídicas de trato sucessivo em que a Fazenda Pública figure como devedora, quando não tiver sido negado o próprio direito reclamado, a prescrição atinge apenas as prestações vencidas antes do quinquênio anterior à propositura da ação.",
+          "Súmula 85: Prescrição quinquenal em relações de trato sucessivo contra a Fazenda Pública — parcelas anteriores ao quinquênio prescrevem.",
           "Súmula 149: A prova exclusivamente testemunhal não basta à comprovação da atividade rurícola, para efeito da obtenção de benefício previdenciário.",
-          "Súmula 235: A conexão não determina a reunião dos processos, se um deles já foi julgado.",
-          "Súmula 376: Compete à turma recursal processar e julgar o recurso interposto contra acórdão dos juizados especiais federais.",
-          "Súmula 490: A dispensa de reexame necessário, quando o valor da condenação ou do direito controvertido for inferior a 60 salários mínimos, não se aplica a sentenças ilíquidas.",
-          "Súmula 568: O relator, monocraticamente e no Superior Tribunal de Justiça, poderá dar ou negar provimento ao recurso quando houver entendimento dominante acerca do tema.",
+          "Súmula 336: A mulher que renunciou aos alimentos na separação judicial tem direito à pensão previdenciária por morte do ex-marido, comprovada a necessidade econômica superveniente.",
+          "Súmula 340: A lei aplicável à concessão de pensão previdenciária por morte é aquela vigente na data do óbito do segurado.",
+          "Súmula 568: O relator, monocraticamente e no STJ, poderá dar ou negar provimento ao recurso quando houver entendimento dominante acerca do tema.",
         ],
       },
       {
         title: "Teses do STF com Repercussão Geral",
-        content: "As teses fixadas em repercussão geral vinculam todos os tribunais e o próprio INSS (art. 927 CPC). Destaques:",
+        content: "As teses fixadas em repercussão geral vinculam todos os tribunais e o próprio INSS (art. 927 CPC). Destaques — confirmar status atual no portal STF:",
         items: [
           "RE 631.240 (Tema 350): Exige prévio requerimento administrativo para ajuizar ação previdenciária — exceções expressas (omissão, resistência, urgência).",
           "RE 626.489 (Tema 313): O prazo decadencial de 10 anos para revisão de benefício (art. 103 da Lei 8.213) é constitucional.",
           "RE 870.947 (Tema 810): Inconstitucionalidade da TR como índice de correção monetária dos benefícios — aplicar IPCA-E.",
           "RE 791.961 (Tema 704): O segurado especial que exerce atividade urbana concomitante perde a qualidade de segurado especial.",
-          "RE 1.221.999 (Tema 1108): Possibilidade de cômputo de tempo de serviço especial após a Lei 9.032/1995 sem necessidade de laudo contemporâneo — STF ainda em julgamento.",
         ],
       },
       {
@@ -389,16 +431,22 @@ const topicsData: Record<string, TopicData> = {
         ],
       },
       {
-        title: "Temas Repetitivos Relevantes (STJ)",
-        content: "Os recursos repetitivos do STJ têm força vinculante sobre os JEFs e TRFs. Temas essenciais:",
+        title: "Recursos Repetitivos Relevantes (STJ)",
+        content: "Os recursos repetitivos têm força vinculante sobre os JEFs e TRFs. Verificar status atualizado no portal do STJ:",
         items: [
-          "Tema 995: A partir de 11/08/2017 (Lei 13.457), os benefícios por incapacidade devem ter prazo de cessação fixado na concessão.",
+          "Tema 995: Benefícios por incapacidade devem ter prazo de cessação fixado na concessão (a partir da Lei 13.457/2017).",
           "Tema 1.012: O INSS não pode cancelar benefício concedido por decisão judicial sem prévia autorização judicial.",
-          "Tema 1.070: O índice de correção monetária das condenações da Fazenda Pública é o IPCA-E, conforme RE 870.947 (STF).",
-          "Tema 1.124: Análise do direito adquirido à aposentadoria pelas regras anteriores à EC 103/2019 para segurados que completaram os requisitos antes de 13/11/2019.",
-          "Tema 1.182 (em julgamento): Possibilidade de cumulação de auxílio-acidente com aposentadoria concedida antes de 11/11/1997.",
+          "Tema 1.070: Índice de correção monetária das condenações da Fazenda Pública é o IPCA-E (RE 870.947/STF).",
+          "Tema 1.124: Direito adquirido à aposentadoria pelas regras anteriores à EC 103/2019 para segurados que completaram requisitos antes de 13/11/2019.",
         ],
       },
+    ],
+    references: [
+      { label: "STJ — Pesquisa de Súmulas (texto oficial e atualizado)", url: "https://sou.stj.jus.br/sou_internet/sumula.jsp", note: "Verificar SEMPRE o texto exato aqui antes de citar" },
+      { label: "STF — Repercussão Geral (teses vinculantes atualizadas)", url: "https://portal.stf.jus.br/repercussao/", note: "Conferir status: pendente, julgado, modulado" },
+      { label: "STJ — Recursos Repetitivos e IAC (temas atualizados)", url: "https://processo.stj.jus.br/repetitivos/", note: "Verificar status de julgamento antes de usar" },
+      { label: "Pesquisa de Jurisprudência — STJ", url: "https://scon.stj.jus.br/SCON/", note: "Busca livre por número do processo ou matéria" },
+      { label: "JurisSTF — Pesquisa de Jurisprudência do STF", url: "https://jurisprudencia.stf.jus.br/pages/search", note: "Busca por RE, AI, ARE e outros" },
     ],
   },
 };
@@ -409,6 +457,7 @@ const fallbackTopic: TopicData = {
   tag: "Em breve",
   objectives: ["Conteúdo disponível em breve"],
   sections: [{ title: "Em preparação", content: "Este módulo será disponibilizado em breve." }],
+  references: [],
 };
 
 export default async function TopicPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -462,6 +511,38 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
               </div>
             ))}
           </div>
+
+          {/* References */}
+          {topic.references.length > 0 && (
+            <div className="mt-10 pt-8" style={{ borderTop: "1px solid var(--color-border)" }}>
+              <p className="font-semibold uppercase mb-4" style={{ fontSize: "11px", letterSpacing: "0.12em", color: "var(--color-subtle)" }}>
+                Fontes e Referências
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                {topic.references.map((ref, i) => (
+                  <li key={i} className="flex items-start gap-3 py-2.5" style={{ borderBottom: i < topic.references.length - 1 ? "1px solid var(--color-border)" : "none" }}>
+                    <span className="flex-shrink-0 mt-1" style={{ color: "var(--color-gold)", fontSize: "10px" }}>↗</span>
+                    <div>
+                      <a
+                        href={ref.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium hover:text-navy transition-colors no-underline"
+                        style={{ color: "var(--color-text)", fontSize: "13.5px" }}
+                      >
+                        {ref.label}
+                      </a>
+                      {ref.note && (
+                        <p className="mt-0.5" style={{ color: "var(--color-subtle)", fontSize: "12px", margin: 0 }}>
+                          {ref.note}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Objectives sidebar */}
