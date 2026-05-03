@@ -1,7 +1,11 @@
 import Link from "next/link";
+import LawLinks from "@/components/LawLinks";
+import ModuleProgressPanel from "@/components/ModuleProgressPanel";
+import { getModuleProgress } from "@/lib/actions/progress";
 
 interface Reference { label: string; url: string; note?: string; }
 interface Section { title: string; content: string; items?: string[]; type?: "default" | "pratico" | "alerta"; }
+interface LawLink { name: string; url: string; desc: string }
 
 interface TopicData {
   title: string;
@@ -11,6 +15,7 @@ interface TopicData {
   sections: Section[];
   highlight?: string;
   references: Reference[];
+  lawLinks?: LawLink[];
 }
 
 const topicsData: Record<string, TopicData> = {
@@ -129,6 +134,12 @@ const topicsData: Record<string, TopicData> = {
       { label: "Lei 8.213/91 — Planos de Benefícios do RGPS", url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm", note: "Planalto.gov.br" },
       { label: "Lei 8.212/91 — Custeio da Seguridade Social", url: "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm", note: "Planalto.gov.br" },
       { label: "Decreto 3.048/99 — Regulamento da Previdência Social", url: "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm", note: "Planalto.gov.br" },
+    ],
+    lawLinks: [
+      { name: "CF/88 — Seguridade Social (Arts. 194–204)", url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm", desc: "Planalto.gov.br — versão compilada" },
+      { name: "Lei 8.213/91 — Planos de Benefícios do RGPS", url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm", desc: "Planalto.gov.br — versão consolidada" },
+      { name: "Lei 8.212/91 — Custeio da Seguridade Social", url: "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm", desc: "Planalto.gov.br — versão consolidada" },
+      { name: "Decreto 3.048/99 — Regulamento da Previdência", url: "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm", desc: "Planalto.gov.br — regulamento completo" },
     ],
   },
 
@@ -250,6 +261,12 @@ const topicsData: Record<string, TopicData> = {
       { label: "STJ — REsp 1.648.305/RS (acréscimo de 25% — repetitivo)", url: "https://processo.stj.jus.br/processo/revista/documento/mediado/?componente=ITA&sequencial=1625906&num_registro=201700015268&data=20180214", note: "Verificar íntegra no STJ" },
       { label: "IN INSS nº 128/2022 — procedimentos de benefícios", url: "https://www.in.gov.br/en/web/dou/-/instrucao-normativa-pres-inss-n-128-de-28-de-marco-de-2022-389275446", note: "Confirmar vigência e atualizações" },
     ],
+    lawLinks: [
+      { name: "Lei 8.213/91 — Benefícios por Incapacidade (Arts. 59–86)", url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm", desc: "Planalto.gov.br — versão consolidada" },
+      { name: "Lei 11.430/2006 — Introdução do NTEP", url: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11430.htm", desc: "Nexo técnico epidemiológico previdenciário" },
+      { name: "Decreto 3.048/99 — Tabela NTEP (Arts. 71–112)", url: "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm", desc: "Planalto.gov.br — regulamento completo" },
+      { name: "Meu INSS — Solicitação de benefícios", url: "https://meu.inss.gov.br", desc: "Portal oficial para requerimentos" },
+    ],
   },
 
   /* ─────────────────────────────────────────────────────────────────────
@@ -360,6 +377,12 @@ const topicsData: Record<string, TopicData> = {
       { label: "STF — RE 664.335 (EPI eficaz e ruído — repercussão geral)", url: "https://portal.stf.jus.br/processos/detalhe.asp?incidente=4149988", note: "Confirmar tese final" },
       { label: "Simulador de aposentadoria — Meu INSS", url: "https://meu.inss.gov.br/central/index.html", note: "Usar para simular regras de transição do cliente" },
     ],
+    lawLinks: [
+      { name: "EC 103/2019 — Reforma da Previdência", url: "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm", desc: "Regras permanentes e de transição" },
+      { name: "Lei 8.213/91 — Aposentadorias (Arts. 18–57)", url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm", desc: "Planalto.gov.br — versão consolidada" },
+      { name: "Lei 9.876/1999 — Fator Previdenciário", url: "https://www.planalto.gov.br/ccivil_03/leis/l9876.htm", desc: "Critérios e fórmula de cálculo" },
+      { name: "Simulador de Aposentadoria — Meu INSS", url: "https://meu.inss.gov.br/central/index.html", desc: "Simule as regras de transição do seu cliente" },
+    ],
   },
 
   /* ─────────────────────────────────────────────────────────────────────
@@ -464,6 +487,12 @@ const topicsData: Record<string, TopicData> = {
       { label: "STF — ADPF 132 (união homoafetiva como dependente previdenciário)", url: "https://portal.stf.jus.br/processos/detalhe.asp?incidente=2691371", note: "Ler tese vinculante" },
       { label: "STJ — Súmula 336 (ex-cônjuge com alimentos e pensão)", url: "https://sou.stj.jus.br/sou_internet/sumula.jsp", note: "Confirmar texto exato no portal STJ" },
     ],
+    lawLinks: [
+      { name: "Lei 8.213/91 — Dependentes e Pensão (Arts. 16, 74–93)", url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm", desc: "Planalto.gov.br — versão consolidada" },
+      { name: "EC 103/2019 — Nova fórmula da pensão por morte", url: "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm", desc: "Art. 23 — regras de cotas e duração" },
+      { name: "Lei 13.846/2019 — Alterações nos benefícios", url: "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/L13846.htm", desc: "Revisão de regras de dependência" },
+      { name: "Lei 8.742/93 — LOAS (Assistência Social)", url: "https://www.planalto.gov.br/ccivil_03/leis/l8742.htm", desc: "BPC para quem perdeu qualidade de segurado" },
+    ],
   },
 
   /* ─────────────────────────────────────────────────────────────────────
@@ -560,6 +589,12 @@ const topicsData: Record<string, TopicData> = {
       { label: "Previc — normas, resoluções e fiscalização das EFPC", url: "https://www.gov.br/previc/pt-br", note: "Confirmar resoluções vigentes" },
       { label: "Susep — regulação de PGBL e VGBL (planos abertos)", url: "https://www.gov.br/susep/pt-br", note: "Circulares e normas de seguros de pessoas" },
       { label: "Receita Federal — dedução de PGBL no IRPF", url: "https://www.gov.br/receitafederal/pt-br", note: "Confirmar limite e condições vigentes" },
+    ],
+    lawLinks: [
+      { name: "LC 109/2001 — Regime de Previdência Complementar", url: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp109.htm", desc: "Legislação base das EFPC e EAPC" },
+      { name: "LC 108/2001 — EFPC de entidades públicas", url: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp108.htm", desc: "Fundos de pensão do setor público" },
+      { name: "Previc — Normas e Fiscalização das EFPC", url: "https://www.gov.br/previc/pt-br", desc: "Resoluções e circulares vigentes" },
+      { name: "Susep — PGBL e VGBL (planos abertos)", url: "https://www.gov.br/susep/pt-br", desc: "Regulação de seguros de pessoas" },
     ],
   },
 
@@ -671,6 +706,12 @@ const topicsData: Record<string, TopicData> = {
       { label: "STF — RE 631.240 (Tema 350 — prévio requerimento administrativo)", url: "https://portal.stf.jus.br/processos/detalhe.asp?incidente=4803765", note: "Ler a tese fixada com atenção às exceções" },
       { label: "CPC/2015 — Arts. 300 a 311 (Tutela de Urgência)", url: "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm", note: "Planalto.gov.br" },
     ],
+    lawLinks: [
+      { name: "Lei 9.784/99 — Processo Administrativo Federal", url: "https://www.planalto.gov.br/ccivil_03/leis/l9784.htm", desc: "Prazos, recursos e princípios do processo" },
+      { name: "Lei 10.259/2001 — Juizados Especiais Federais", url: "https://www.planalto.gov.br/ccivil_03/leis/2001/l10259.htm", desc: "JEF — procedimento e competência" },
+      { name: "CPC/2015 — Tutela de Urgência (Arts. 300–311)", url: "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm", desc: "Requisitos e cumprimento da tutela" },
+      { name: "Decreto 10.410/2020 — CRPS e JRPS", url: "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/decreto/D10410.htm", desc: "Estrutura do recurso administrativo no INSS" },
+    ],
   },
 
   /* ─────────────────────────────────────────────────────────────────────
@@ -779,6 +820,12 @@ const topicsData: Record<string, TopicData> = {
       { label: "Pesquisa de Jurisprudência STJ", url: "https://scon.stj.jus.br/SCON/", note: "Filtrar por ramo 'Previdenciário' para maior precisão" },
       { label: "JurisSTF — Pesquisa de Jurisprudência", url: "https://jurisprudencia.stf.jus.br/pages/search", note: "Buscar por número do RE ou por assunto" },
     ],
+    lawLinks: [
+      { name: "SCON STJ — Pesquisa de Jurisprudência", url: "https://scon.stj.jus.br/SCON/", desc: "Filtrar por 'Previdenciário' e tipo de decisão" },
+      { name: "STF — Pesquisa de Jurisprudência", url: "https://jurisprudencia.stf.jus.br/pages/search", desc: "Repercussão geral e teses vinculantes" },
+      { name: "STJ — Repetitivos e Temas vinculantes", url: "https://processo.stj.jus.br/repetitivos/", desc: "Status: pendente, julgado, suspenso" },
+      { name: "STF — Repercussão Geral", url: "https://portal.stf.jus.br/repercussao-geral/", desc: "Temas com status e tese fixada" },
+    ],
   },
 };
 
@@ -794,6 +841,8 @@ const fallbackTopic: TopicData = {
 export default async function TopicPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const topic = topicsData[slug] ?? fallbackTopic;
+  const initialCompleted = await getModuleProgress(slug);
+  const sectionItems = topic.sections.map((s, i) => ({ key: `section-${i}`, title: s.title }));
 
   return (
     <div className="min-h-screen bg-canvas">
@@ -824,6 +873,8 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
               </p>
             </blockquote>
           )}
+
+          <LawLinks laws={topic.lawLinks ?? []} />
 
           <div className="prose-legal">
             {topic.sections.map((section, i) => (
@@ -918,6 +969,11 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
               style={{ fontSize: "13px", borderTop: "1px solid var(--color-border)" }}>
               ← Todos os módulos
             </Link>
+            <ModuleProgressPanel
+              moduleSlug={slug}
+              sections={sectionItems}
+              initialCompleted={initialCompleted}
+            />
           </div>
         </aside>
       </div>
