@@ -66,8 +66,8 @@ const topics = [
 
 const stats = [
   { value: "7", label: "Módulos" },
-  { value: "71", label: "Aulas" },
-  { value: "29h", label: "de conteúdo" },
+  { value: "28", label: "Seções de conteúdo" },
+  { value: "~1h", label: "de leitura estimada" },
 ];
 
 export default function Home() {
