@@ -40,6 +40,21 @@ durante a leitura reforça o foco e facilita auto-avaliação.
 **Por quê:** Diferencia visualmente o texto normativo (lei, súmula) do texto
 explicativo — reduz o esforço cognitivo de identificar fontes primárias.
 
+### Seção de Fontes e Referências
+**Decisão:** Rodapé de cada módulo com links diretos para fontes primárias oficiais.
+**Por quê:** Advogados precisam citar fontes confiáveis. Ter os links integrados ao conteúdo
+elimina o atrito de buscar a legislação separadamente e reforça a credibilidade do portal.
+**Detalhe:** Notas de verificação (`note`) alertam itens que devem ser conferidos
+antes do uso em peças, como texto exato de súmulas e status de temas repetitivos.
+
+## Estado Atual do Projeto (v1.0)
+
+- ✅ 7 módulos com conteúdo jurídico completo
+- ✅ Seção de fontes com links para legislação e jurisprudência em todos os módulos
+- ✅ Build de produção sem erros (Next.js 15.5.15 + Webpack)
+- ✅ Deploy em produção: [portal-prev.vercel.app](https://portal-prev.vercel.app)
+- ✅ Repositório GitHub sincronizado
+
 ## Próximas Iterações
 
 - [ ] Barra de progresso por módulo (localStorage)
@@ -47,3 +62,5 @@ explicativo — reduz o esforço cognitivo de identificar fontes primárias.
 - [ ] Marcadores e anotações por seção
 - [ ] Modo leitura (oculta sidebar, aumenta linha de texto)
 - [ ] Versão mobile com drawer navigation
+- [ ] Quizzes de fixação ao final de cada módulo
+- [ ] Destaque de texto (highlight) com cor gold para termos-chave

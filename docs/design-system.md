@@ -53,23 +53,43 @@
 ## Componentes
 
 ### TopicCard
-Card de módulo na homepage. Hover eleva sutilmente (+shadow, -1px translateY).
-Limite de 2 linhas na descrição para grid uniforme.
+Card de módulo na homepage. Hover eleva sutilmente (`hover:-translate-y-px`, `hover:shadow-lg`, `hover:border-navy`).
+Limite de 2 linhas na descrição (`-webkit-line-clamp: 2`) para grid uniforme.
+Props: `number`, `title`, `description`, `href`, `lessonCount`, `duration`, `progress?`, `tag?`.
 
 ### Sidebar
 Fixa, 260px, fundo navy. Logo com acento gold. Numeração monospace em gold/50.
+Hover nos itens: `group-hover:text-white` + fundo `rgba(255,255,255,0.08)`.
 
 ### Prose Legal
-Classe `.prose-legal` para conteúdo editorial. Marcadores em `—` gold, blockquote com borda gold.
+Classe `.prose-legal` para conteúdo editorial nos módulos:
+- Marcadores `<li>` com `—` em gold (pseudo-elemento `::before`)
+- `<blockquote>` com borda esquerda gold + fundo `surface-2`
+- `<h2>` com borda inferior `border` e cor navy
+- `<p>` com `line-height: 1.8` e cor `muted`
+
+### References (seção de fontes)
+Rodapé de cada módulo. Lista de links externos com ícone `↗` em gold.
+Campo `note` exibe aviso de verificação em cor `subtle`.
+`target="_blank" rel="noopener noreferrer"` em todos os links.
 
 ## Espaçamento
 
 Sistema de 4px: 4, 8, 12, 16, 20, 24, 32, 40, 48...
 Padding de página: `px-12` (48px) — generoso para conteúdo jurídico denso.
+Sidebar de objetivos: `width: 260px`, `sticky top-6`.
 
 ## Acessibilidade
 
 - Contraste mínimo AA em todos os textos
-- navy sobre canvas: ~7:1 (AAA)
-- muted sobre canvas: ~4.8:1 (AA)
-- Focus visible: padrão do browser + anel de foco explícito a implementar
+- navy `#1B3A5C` sobre canvas `#F8F7F4`: ~7.2:1 (AAA)
+- muted `#5A6577` sobre canvas `#F8F7F4`: ~4.9:1 (AA)
+- gold `#C9A84C` usado apenas como decoração — não como único portador de informação
+- Links externos com `rel="noopener noreferrer"` e abertura em nova aba
+- Focus visible: padrão do browser (a implementar: anel de foco customizado)
+
+## Notas de implementação
+
+- Tailwind v4: sem `tailwind.config.ts` — tokens definidos via `@theme inline` no `globals.css`
+- Fontes carregadas via `next/font/google` — sem flash de fonte (preload automático)
+- Hover states com event handlers substituídos por classes Tailwind (componentes Server-side)
