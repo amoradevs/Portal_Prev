@@ -55,7 +55,11 @@
 ### TopicCard
 Card de módulo na homepage. Hover eleva sutilmente (`hover:-translate-y-px`, `hover:shadow-lg`, `hover:border-navy`).
 Limite de 2 linhas na descrição (`-webkit-line-clamp: 2`) para grid uniforme.
+Footer: `{lessonCount} seções · {duration}`. Barra de progresso gold (3px) exibida quando `progress > 0`.
 Props: `number`, `title`, `description`, `href`, `lessonCount`, `duration`, `progress?`, `tag?`.
+
+**Progresso dinâmico:** calculado na homepage server-side via Supabase. Fórmula:
+`Math.round((seçõesConcluídas / lessonCount) * 100)`. Atualiza a cada visita à homepage.
 
 ### Sidebar
 Fixa, 260px, fundo navy. Três seções: Logo → Módulos (flex-1, scrollável) → Ferramentas → Footer.

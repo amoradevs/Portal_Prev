@@ -26,9 +26,9 @@ de "mapa do conhecimento" sem necessitar scroll excessivo.
 para não competir com o título.
 
 ### Barra de estatísticas
-**Decisão:** Stats bar entre hero e grid (7 módulos / 71 aulas / 29h).
-**Por quê:** Dá ao usuário uma âncora de escopo. Saber o tamanho do curso
-reduz ansiedade e facilita planejamento de estudo.
+**Decisão:** Stats bar entre hero e grid com números reais (7 módulos / 51 seções / ~4h de estudo).
+**Por quê:** Dá ao usuário uma âncora de escopo. Saber o tamanho do curso reduz ansiedade e facilita planejamento de estudo.
+**Detalhe:** `totalSections` calculado automaticamente somando `lessonCount` de todos os módulos — nunca desatualiza ao adicionar novos módulos.
 
 ### Página de tópico: aside de objetivos
 **Decisão:** Sidebar lateral direita com objetivos de aprendizado.
@@ -71,11 +71,13 @@ um mapa de progresso pessoal.
 **Detalhe:** Feedback otimista instantâneo (`useOptimistic`, React 19) — o círculo vira gold
 no clique, sem aguardar resposta do servidor. Persiste entre sessões e dispositivos via Supabase.
 
-## Estado Atual do Projeto (v1.1)
+## Estado Atual do Projeto (v1.2)
 
-- ✅ 7 módulos com conteúdo jurídico completo e casos práticos
+- ✅ 7 módulos com conteúdo jurídico completo e casos práticos (51 seções reais)
 - ✅ Seção de fontes com links para legislação e jurisprudência em todos os módulos
 - ✅ Hub de Acesso Direto: Painel de Atalhos + Links Diretos + Checklist Supabase
+- ✅ Stats e progresso reais na homepage (sem dados fabricados)
+- ✅ Barra de progresso dos cards calculada dinamicamente do Supabase
 - ✅ Build de produção sem erros (Next.js 15.5.15 + Webpack)
 - ✅ Deploy em produção: [portal-prev.vercel.app](https://portal-prev.vercel.app)
 - ✅ Repositório GitHub conectado ao Vercel (auto-deploy em todo push)

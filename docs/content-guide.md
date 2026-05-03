@@ -103,14 +103,25 @@ Abra `components/Sidebar.tsx` e adicione ao array `topics`:
 
 ### 4. Atualizar as estatísticas
 
-Em `app/page.tsx`, atualize o array `stats` com os novos totais:
+Em `app/page.tsx`, atualize `lessonCount` e `duration` no array `topics` com os valores reais do novo módulo. O total de seções (`totalSections`) e o progresso dos cards são calculados automaticamente:
 
 ```typescript
-const stats = [
-  { value: "8", label: "Módulos" },
-  { value: "77", label: "Aulas" },
-  { value: "31h", label: "de conteúdo" },
-];
+// Exemplo: novo módulo com 7 seções e ~35 min de estudo
+{
+  slug: "salario-minimo",
+  number: "08",
+  title: "Salário Mínimo e Reajuste de Benefícios",
+  description: "...",
+  href: "/topicos/salario-minimo",
+  lessonCount: 7,      // número real de seções em topicsData
+  duration: "~35 min", // estimativa honesta de tempo de estudo
+  tag: "Atualização",
+},
+```
+
+O stat bar calcula o total automaticamente via:
+```typescript
+const totalSections = topics.reduce((acc, t) => acc + t.lessonCount, 0);
 ```
 
 ## Slugs dos módulos existentes
