@@ -47,20 +47,46 @@ elimina o atrito de buscar a legislação separadamente e reforça a credibilida
 **Detalhe:** Notas de verificação (`note`) alertam itens que devem ser conferidos
 antes do uso em peças, como texto exato de súmulas e status de temas repetitivos.
 
-## Estado Atual do Projeto (v1.0)
+### Painel de Atalhos — Ferramentas na Sidebar
+**Decisão:** Seção "Ferramentas" fixa na sidebar com links para Meu INSS, Cálculo Jurídico, STJ e STF.
+**Por quê:** A advogada alterna constantemente entre estudo e prática. Centralizar os portais
+mais usados na mesma tela elimina o atrito de abrir novas abas e fazer buscas repetidas.
+**Detalhe:** Links com sublabel descritivo (ex: "Benefícios e requerimentos") para deixar
+imediatamente claro o que cada ferramenta faz sem precisar memorizar.
 
-- ✅ 7 módulos com conteúdo jurídico completo
+### Links Diretos — Legislação do Módulo (One-Click Law)
+**Decisão:** Grade de 4 cards clicáveis no topo de cada módulo, apontando para as leis
+compiladas e oficiais no Planalto e portais equivalentes.
+**Por quê:** A principal lei de cada matéria deve estar a um clique — sem precisar abrir
+o Google, digitar o número da lei e encontrar a versão certa. Reduz o tempo entre
+estudar o conceito e verificar o texto legal.
+**Detalhe:** Posicionado antes das seções de conteúdo para que a advogada possa abrir
+a lei em paralelo enquanto lê a explicação.
+
+### Checklist de Progresso com Supabase
+**Decisão:** Painel "Progresso" na sidebar direita com checkboxes por seção, persistido no Supabase.
+**Por quê:** Estudar sem referência de onde está gera ansiedade e repetição desnecessária.
+O checklist dá clareza imediata sobre o que foi coberto e o que falta, funcionando como
+um mapa de progresso pessoal.
+**Detalhe:** Feedback otimista instantâneo (`useOptimistic`, React 19) — o círculo vira gold
+no clique, sem aguardar resposta do servidor. Persiste entre sessões e dispositivos via Supabase.
+
+## Estado Atual do Projeto (v1.1)
+
+- ✅ 7 módulos com conteúdo jurídico completo e casos práticos
 - ✅ Seção de fontes com links para legislação e jurisprudência em todos os módulos
+- ✅ Hub de Acesso Direto: Painel de Atalhos + Links Diretos + Checklist Supabase
 - ✅ Build de produção sem erros (Next.js 15.5.15 + Webpack)
 - ✅ Deploy em produção: [portal-prev.vercel.app](https://portal-prev.vercel.app)
-- ✅ Repositório GitHub sincronizado
+- ✅ Repositório GitHub conectado ao Vercel (auto-deploy em todo push)
+- ✅ Supabase configurado (projeto `portal_prev`, tabela `progress` com RLS)
 
 ## Próximas Iterações
 
-- [ ] Barra de progresso por módulo (localStorage)
-- [ ] Modo de busca (search por palavra-chave)
-- [ ] Marcadores e anotações por seção
+- [ ] Modo de busca (search por palavra-chave dentro dos módulos)
+- [ ] Marcadores e anotações pessoais por seção
 - [ ] Modo leitura (oculta sidebar, aumenta linha de texto)
 - [ ] Versão mobile com drawer navigation
 - [ ] Quizzes de fixação ao final de cada módulo
 - [ ] Destaque de texto (highlight) com cor gold para termos-chave
+- [ ] Notificações de atualização quando uma lei referenciada for alterada

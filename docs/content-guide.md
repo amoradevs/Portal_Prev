@@ -32,6 +32,7 @@ O objeto `topicsData` contém um item por módulo, indexado pelo slug da URL.
         "Item da lista 1",
         "Item da lista 2",
       ],
+      type: "default",             // opcional: "default" | "pratico" | "alerta"
     },
   ],
   references: [
@@ -41,8 +42,23 @@ O objeto `topicsData` contém um item por módulo, indexado pelo slug da URL.
       note: "Nota de contexto — ex: 'Confirmar versão vigente'",  // opcional
     },
   ],
+  lawLinks: [                      // cards de legislação com link direto ao Planalto
+    {
+      name: "Lei 8.213/91 — Planos de Benefícios do RGPS",
+      url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+      desc: "Planalto.gov.br — versão consolidada",
+    },
+  ],
 },
 ```
+
+### Tipos de seção (`type`)
+
+| Tipo | Visual | Uso |
+|------|--------|-----|
+| `"default"` (omitido) | Seção normal | Conteúdo expositivo |
+| `"pratico"` | Fundo cinza, borda navy, badge "Caso Prático" | Exercícios e exemplos práticos |
+| `"alerta"` | Fundo amarelo suave, borda gold | Avisos e armadilhas comuns |
 
 ## Como adicionar um novo módulo
 
@@ -109,13 +125,25 @@ const stats = [
 | `processo-administrativo` | `/topicos/processo-administrativo` |
 | `jurisprudencia` | `/topicos/jurisprudencia` |
 
+## Checklist de progresso (Supabase)
+
+Cada seção de módulo aparece automaticamente no painel "Progresso" da sidebar direita como um item marcável. A chave de cada item é `section-{índice}` (ex: `section-0`, `section-1`).
+
+O progresso é salvo na tabela `progress` do Supabase:
+- `module_slug` — slug do módulo (ex: `fundamentos`)
+- `item_key` — identificador da seção (ex: `section-0`)
+- `completed` — boolean
+
+Não é necessário nenhum código adicional para incluir novas seções no checklist — elas aparecem automaticamente.
+
 ## Boas práticas de conteúdo
 
 - **`highlight`:** Use para a norma legal mais importante do módulo ou a tese jurídica central.
-- **`objectives`:** 4 itens é o ideal — correspondem a competências verificáveis.
-- **`sections`:** 3 a 5 seções por módulo. Mais do que isso, considere dividir em dois módulos.
+- **`objectives`:** 4 a 5 itens — correspondem a competências verificáveis.
+- **`sections`:** 6 a 8 seções por módulo, incluindo sempre uma seção `type: "pratico"` ao final.
 - **`items`:** Use para listas de requisitos, incisos legais, critérios — não para texto corrido.
 - **`references`:** Sempre incluir pelo menos a lei principal e uma fonte jurisprudencial. Adicionar `note` quando o conteúdo pode estar desatualizado.
+- **`lawLinks`:** 4 leis por módulo — priorizar a legislação mais consultada na prática diária.
 
 ## Fontes de referência primárias
 

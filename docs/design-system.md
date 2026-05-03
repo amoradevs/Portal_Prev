@@ -58,8 +58,24 @@ Limite de 2 linhas na descrição (`-webkit-line-clamp: 2`) para grid uniforme.
 Props: `number`, `title`, `description`, `href`, `lessonCount`, `duration`, `progress?`, `tag?`.
 
 ### Sidebar
-Fixa, 260px, fundo navy. Logo com acento gold. Numeração monospace em gold/50.
-Hover nos itens: `group-hover:text-white` + fundo `rgba(255,255,255,0.08)`.
+Fixa, 260px, fundo navy. Três seções: Logo → Módulos (flex-1, scrollável) → Ferramentas → Footer.
+Numeração monospace em gold/50. Hover nos itens: `group-hover:text-white`.
+
+**Seção Ferramentas:** links externos com ícone `↗` gold, label e sublabel descritivo.
+Links: Meu INSS, Cálculo Jurídico, Pesquisa STJ, Pesquisa STF.
+
+### LawLinks
+Grade 2 colunas de cards clicáveis, posicionada entre o `highlight` e as seções do módulo.
+Cada card: ícone `↗` gold + nome da lei (navy, 12.5px) + descrição (subtle, 11px).
+`target="_blank" rel="noopener noreferrer"`. Renderizado server-side (sem estado).
+Props: `laws: { name, url, desc }[]`.
+
+### ModuleProgressPanel
+Componente client-side embutido na sidebar de objetivos (separado por borda).
+Barra de progresso gold (height 3px, transition 500ms). Lista de seções com botões circulares.
+Estado marcado: círculo gold preenchido + texto riscado (subtle). Estado vazio: círculo com borda.
+Usa `useOptimistic` (React 19) para feedback instantâneo + Server Action para persistir no Supabase.
+Props: `moduleSlug`, `sections: { key, title }[]`, `initialCompleted: string[]`.
 
 ### Prose Legal
 Classe `.prose-legal` para conteúdo editorial nos módulos:
@@ -93,3 +109,8 @@ Sidebar de objetivos: `width: 260px`, `sticky top-6`.
 - Tailwind v4: sem `tailwind.config.ts` — tokens definidos via `@theme inline` no `globals.css`
 - Fontes carregadas via `next/font/google` — sem flash de fonte (preload automático)
 - Hover states com event handlers substituídos por classes Tailwind (componentes Server-side)
+- Server Actions em `lib/actions/progress.ts` — `'use server'` no topo do arquivo
+- Supabase client instanciado por chamada (não singleton) nos Server Actions
+- `getModuleProgress` chamado diretamente pelo Server Component da página (não via RPC)
+- `toggleItem` chamado via mecanismo de Server Action pelo Client Component
+- Graceful degradation: sem env vars Supabase, portal funciona normalmente sem checklist persistente
