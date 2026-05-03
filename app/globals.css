@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: #1B3A5C;
+  --color-navy-hover: #2A5180;
+  --color-gold: #C9A84C;
+  --color-gold-light: #E8D08A;
+  --color-canvas: #F8F7F4;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F0EDE8;
+  --color-text: #1A1A2E;
+  --color-muted: #5A6577;
+  --color-subtle: #8A95A3;
+  --color-border: #E2DDD6;
+  --color-border-strong: #C8C3BB;
+  --color-success: #2D7D46;
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { -webkit-font-smoothing: antialiased; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-canvas);
+  color: var(--color-text);
+  font-family: var(--font-sans);
 }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-surface-2); }
+::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 3px; }
+
+.prose-legal h2 {
+  font-family: var(--font-display);
+  color: var(--color-navy);
+  font-size: 1.375rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.prose-legal h3 {
+  font-family: var(--font-display);
+  color: var(--color-text);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.prose-legal p {
+  color: var(--color-muted);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+}
+.prose-legal ul { list-style: none; padding: 0; margin-bottom: 1rem; }
+.prose-legal ul li {
+  color: var(--color-muted);
+  line-height: 1.7;
+  font-size: 0.9375rem;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  position: relative;
+}
+.prose-legal ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+  font-size: 0.75rem;
+  top: 0.35rem;
+}
+.prose-legal blockquote {
+  border-left: 3px solid var(--color-gold);
+  padding: 0.75rem 1rem;
+  background: var(--color-surface-2);
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin: 1.5rem 0;
+}
+.prose-legal blockquote p { color: var(--color-navy); font-style: italic; margin: 0; }

@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portal Prev
 
-## Getting Started
+> Portal de aprendizado de **Direito Previdenciário** — interface moderna, minimalista e elegante para advogados.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| Tecnologia | Versão | Uso |
+|---|---|---|
+| Next.js | 16 | Framework React com App Router |
+| React | 19 | UI |
+| TypeScript | 5 | Tipagem |
+| Tailwind CSS | 4 | Estilização via CSS vars |
+| Playfair Display | — | Tipografia elegante (títulos) |
+| Inter | — | Tipografia clara (corpo) |
+
+## Design System
+
+Paleta profissional: autoridade + elegância.
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--color-navy` | `#1B3A5C` | Cor primária, cabeçalhos |
+| `--color-gold` | `#C9A84C` | Acento, badges, marcadores |
+| `--color-canvas` | `#F8F7F4` | Fundo principal |
+| `--color-surface` | `#FFFFFF` | Cards |
+| `--color-text` | `#1A1A2E` | Texto principal |
+| `--color-muted` | `#5A6577` | Texto secundário |
+| `--color-border` | `#E2DDD6` | Bordas |
+
+## Estrutura
+
+```
+app/
+├── globals.css         # Design tokens (Tailwind v4 @theme)
+├── layout.tsx          # Root layout — fontes + sidebar
+├── page.tsx            # Homepage — hero + grid de módulos
+└── topicos/[slug]/
+    └── page.tsx        # Página de cada módulo
+
+components/
+├── Sidebar.tsx         # Navegação lateral fixa
+└── TopicCard.tsx       # Card de módulo na homepage
+
+docs/
+├── design-system.md    # Decisões de design
+└── ux-decisions.md     # Racional de UX
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Módulos disponíveis
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Fundamentos da Previdência Social
+2. Benefícios por Incapacidade
+3. Aposentadorias ✦ (com regras de transição EC 103/2019)
+4. Pensão por Morte e Outros Benefícios
+5. Previdência Complementar
+6. Processo Administrativo e Recursos
+7. Jurisprudência e Súmulas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Como rodar
 
-## Learn More
+```bash
+npm install
+npm run dev
+# → http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Documentação
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Veja [`docs/`](./docs/) para decisões de design e UX.
