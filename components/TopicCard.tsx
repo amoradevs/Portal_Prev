@@ -53,7 +53,7 @@ export default function TopicCard({ number, title, description, href, lessonCoun
       {/* Footer */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-subtle" style={{ fontSize: "12px" }}>{lessonCount} aulas</span>
+          <span className="text-subtle" style={{ fontSize: "12px" }}>{lessonCount} seções</span>
           <span className="text-border-strong" style={{ fontSize: "12px" }}>·</span>
           <span className="text-subtle" style={{ fontSize: "12px" }}>{duration}</span>
         </div>
